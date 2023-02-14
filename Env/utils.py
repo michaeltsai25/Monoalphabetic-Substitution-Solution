@@ -1,12 +1,14 @@
 from math import log
 
 def kl_divergence(cipherDistr, plainDistr):
+    """Calculates the Kullback-Leibler Divergence between two distributions"""
     div = 0
     for i in range(26):
         div += cipherDistr[i]*log(cipherDistr[i]/plainDistr[i])
     return div
 
 def calcFreq(ciphText):
+    """Orders the characters in the text from least common to most common"""
     ciphText = ciphText.replace(" ", "")
     text = "".join(set(ciphText))
     freq = {}
