@@ -49,4 +49,4 @@ def str_to_list_2(string):
     return l
  
 if __name__ == "__main__":
-    print(generate_key())
+    encrypt_text_file()
