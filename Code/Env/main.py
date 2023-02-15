@@ -1,4 +1,4 @@
-import guess
+from guess import Guess
 import constants
 
 class Runner:
@@ -6,4 +6,4 @@ class Runner:
         self.ct = ciphertext
 
     def main(self):
-        Guess = guess(self.ct)
+        guess = Guess(self.ct)
