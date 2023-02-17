@@ -1,4 +1,5 @@
 import utils
+from random import randint
 
 class Guess:
     def __init__(self, ciphertext):
@@ -19,3 +20,41 @@ class Guess:
             self.ct_to_pt[chars[i]] = guess_desc_order[i]
         for char in self.ciph_text:
             self.guess += self.ct_to_pt[char]
+
+    def decrypted(self):
+        """Checks to see if the guess is decrypted"""
+        count, g = self.num_words()
+        if len(g) == 0:
+            return True
+        return False
+    
+    def num_words(self):
+        """Counts the number of words decrypted in the guess"""
+        g = self.guess
+        count = 0
+        with open('wordbank.txt', 'r') as new_file:
+            word_list = new_file.split("\n")
+            for word in word_list:
+                if word in self.guess:
+                    g.replace(word, "")
+                    count += 1
+        return count, g
+
+    def random_swap_neigh_chars(self):
+        """Randomly swaps neighboring letters in the guess"""
+        x = randint(0, len(self.guess)-1)
+        self.swap_general(x)
+        return x
+
+    def swap_general(self, x):
+        g = self.Convert(self.guess)
+        char = g[x]
+        g[x] = g[x+1]
+        g[x+1] = char
+        self.guess = "".join(g)
+
+    def Convert(self, string):
+        """Helper function for random_swap_neigh_chars, converts a string to a list of chars"""
+        list1 = []
+        list1[:0] = string
+        return list1
