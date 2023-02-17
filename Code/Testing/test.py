@@ -1,5 +1,5 @@
 from Env import guess
-from TrainingData import Generate_Data
+from . import Generate_Data
 import timeit
 
 def test_guess_reset():
