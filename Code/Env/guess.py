@@ -32,9 +32,9 @@ class Guess:
         """Counts the number of words decrypted in the guess"""
         g = self.guess
         count = 0
-        with open('wordbank.txt', 'r') as new_file:
+        with open('dictionary.txt', 'r') as new_file:
             word_list = new_file.split("\n")
-            for word in word_list:
+            for word in word_list: #check to see if this creates runtime issues
                 if word in self.guess:
                     g.replace(word, "")
                     count += 1
@@ -47,6 +47,7 @@ class Guess:
         return x
 
     def swap_general(self, x):
+        """Swaps two neighboring letters"""
         g = self.Convert(self.guess)
         char = g[x]
         g[x] = g[x+1]
