@@ -33,8 +33,9 @@ class Guess:
         g = self.guess
         count = 0
         with open('dictionary.txt', 'r') as new_file:
-            word_list = new_file.split("\n")
-            for word in word_list: #check to see if this creates runtime issues
+            file = new_file.read()
+            word_list = file.split("\n")
+            for word in word_list:
                 if word in self.guess:
                     g.replace(word, "")
                     count += 1
