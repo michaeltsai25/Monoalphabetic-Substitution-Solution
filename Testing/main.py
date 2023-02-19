@@ -1,3 +1,5 @@
+#import sys
+#sys.path.append("/Users/michaeltsai/Documents/GitHub/Monoalphabetic-Substitution-Solution/./Code/Env")
 from guess import Guess
 from constants import MAX_KL_DIV
 from utils import kl_divergence
