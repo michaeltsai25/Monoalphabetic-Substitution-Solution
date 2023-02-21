@@ -30,10 +30,10 @@ def generate_key():
 
 def encrypt_text_file():
     """Encrypts text files with random keys"""
-    with open("plaintexts.txt", 'r') as new_file:
+    with open("The Hunger Games.txt", 'r') as new_file:
         pt = str(new_file.read())
     ptl = str_to_list_2(pt)
-    with open("Trainingdata.txt", "w") as data:
+    with open("trainingdata.txt", "w") as data:
         for item in ptl: 
             key = generate_key()
             data.write(encrypt_plaintext(key, item))
@@ -47,6 +47,23 @@ def str_to_list_2(string):
             l.append(string[ss:i])
             ss = i+2
     return l
+
+def convert_plaintexts():
+    hg = ""
+    with open("The Hunger Games.txt", 'r+') as new_file:
+        hg = new_file.read()
+        hg = "".join(hg.split())
+        hg = hg.lower()
+        hg.replace(' ', '')
+        count = 0
+        for char in hg:
+            if char in string.punctuation or char in string.digits:
+                hg.replace(char, '')
+                continue
+            elif count%28 == 0:
+                hg[count] = "\n"
+            count += 1
+        new_file.write(hg)
  
 if __name__ == "__main__":
-    encrypt_text_file()
+    convert_plaintexts()
