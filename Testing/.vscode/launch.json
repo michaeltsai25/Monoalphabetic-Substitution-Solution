@@ -8,10 +8,18 @@
             "name": "Python: Module",
             "type": "python",
             "request": "launch",
-            "module": "main",
-            "justMyCode": true,
+            "module": "unittest",
             "env": {
-                "PYTHONPATH": "${workspaceFolder}/../Code"
+                "PYTHONPATH": "${workspaceFolder}/./Code/Env"
+            }
+        },
+        {
+            "name": "Python: Module",
+            "type": "python",
+            "request": "launch",
+            "module": "main",
+            "env": {
+                "PYTHONPATH": "${workspaceFolder}/./Code/Env"
             }
         }
     ]

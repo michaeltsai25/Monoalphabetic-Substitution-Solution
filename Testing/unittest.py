@@ -1,5 +1,3 @@
-import sys
-sys.path.append("/Users/michaeltsai/Documents/GitHub/Monoalphabetic-Substitution-Solution/./Code/Env")
 from guess import Guess
 import unittest
 

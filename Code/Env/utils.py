@@ -15,6 +15,3 @@ def calcFreq(ciphText):
     for char in text: 
         freq[char] = ciphText.count(char)/len(ciphText)
     return sorted(freq.items(), key=lambda x: x[1])
-
-if __name__ == "__main__":
-    print(calcFreq("this is a test"))
