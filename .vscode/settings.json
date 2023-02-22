@@ -1,3 +1,6 @@
 {
-    "python.analysis.extraPaths": ["${workspaceFolder}/./Code/Env"]
+    "python.analysis.extraPaths": [
+        "${workspaceFolder}/./Code/Env"
+    ],
+    "python.analysis.typeCheckingMode": "off"
 }

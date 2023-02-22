@@ -50,19 +50,21 @@ def str_to_list_2(string):
 
 def convert_plaintexts():
     hg = ""
-    with open("The Hunger Games.txt", 'r+') as new_file:
+    with open("/Users/michaeltsai/Documents/Github/Monoalphabetic-Substitution-Solution/TrainingData/TheHungerGames.txt", 'r') as new_file:
         hg = new_file.read()
         hg = "".join(hg.split())
         hg = hg.lower()
         hg.replace(' ', '')
         count = 0
-        for char in hg:
-            if char in string.punctuation or char in string.digits:
-                hg.replace(char, '')
-                continue
-            elif count%28 == 0:
-                hg[count] = "\n"
-            count += 1
+        length = len(hg)
+        for i in range(len(hg)):
+            if i-count > 28 and hg[i] in string.punctuation:
+                ss1 = hg[0:i]
+                ss2 = hg[i+1:length]
+                hg = ss1+'\n'+ss2
+                count = i
+        hg = hg.translate(str.maketrans('', '', string.punctuation))
+    with open("/Users/michaeltsai/Documents/Github/Monoalphabetic-Substitution-Solution/TrainingData/TheHungerGames.txt", "w") as new_file:
         new_file.write(hg)
  
 if __name__ == "__main__":
