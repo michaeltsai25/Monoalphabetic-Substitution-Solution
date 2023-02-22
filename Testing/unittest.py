@@ -1,3 +1,5 @@
+import sys
+sys.path.append("./Code/Env")
 from guess import Guess
 import unittest
 
@@ -11,7 +13,7 @@ class TestGuess(unittest.TestCase):
     def time_num_words(self):
         g = Guess("thisisatesttoseetheruntimeofthefunctionnumwords")
         num = g.num_words()
-        self.assertEqual(num[0], "Should be 14")
+        self.assertEqual(num[0], 14)
 
 if __name__ == "__main__":
     unittest.main()
