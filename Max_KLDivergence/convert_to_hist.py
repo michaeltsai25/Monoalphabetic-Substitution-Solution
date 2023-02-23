@@ -19,4 +19,4 @@ def convert(img_name, txt_name, hist):
     plt.show()
 
 if __name__ == "__main__":
-    convert("Samp_Distr.png", "Samp_Distr.txt", False)
+    convert("Distr.png", "Distr_data.txt", False)
