@@ -2,5 +2,8 @@
     "python.analysis.extraPaths": [
         "${workspaceFolder}/./Code/Env"
     ],
-    "python.analysis.typeCheckingMode": "off"
+    "python.analysis.typeCheckingMode": "off",
+    "python.analysis.diagnosticSeverityOverrides": {
+        "reportMissingImports": "none",
+        }
 }
