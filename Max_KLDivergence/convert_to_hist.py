@@ -1,21 +1,22 @@
 import matplotlib.pyplot as plt
 import numpy as np
+import seaborn as sns
 import os
+import sys
+sys.path.append("./Code/Env")
+from utils import read_data
 
-def convert():
-    with open("/Users/michaeltsai/Documents/Github/Monoalphabetic-Substitution-Solution/Data/data.txt", 'r') as new_file:
-        data = new_file.read()
-        data = data.replace('[', "")
-        data = data.replace(']', "")
-        data = data.split(", ")
-        data = [float(point) for point in data]
-        data = np.array(data)
+def convert(img_name, txt_name, hist):
+    data = read_data(txt_name)
+    data = np.array(data)
+    if hist:
         plt.hist(data)
-        my_path = "/Users/michaeltsai/Documents/GitHub/Monoalphabetic-Substitution-Solution"
-        plt.savefig(my_path + "/Data/Distr.png")
-
-def save_plot(data):
-    pass
+    else:
+        sns.set_style('whitegrid')
+        sns.kdeplot(data, bw=0.5)
+    my_path = "/Users/michaeltsai/Documents/GitHub/Monoalphabetic-Substitution-Solution"
+    plt.savefig(os.path.join(my_path + "/Data/" + img_name))
+    plt.show()
 
 if __name__ == "__main__":
-    convert()
+    convert("Samp_Distr.png", "Samp_Distr.txt", False)
