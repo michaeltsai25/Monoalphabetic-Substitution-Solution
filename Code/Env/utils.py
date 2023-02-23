@@ -9,13 +9,13 @@ def kl_divergence(cipherDistr):
 def calcFreq(ciphText):
     """Orders the characters in the text from least common to most common"""
     freq = store_freq(ciphText)
-    return sorted(freq.items(), key=lambda x: x[1])
+    return dict(sorted(freq.items(), key=lambda x: x[1], reverse=True))
 
 def store_freq(ciphText):
     """Helper function for calcFreq"""
     text = "".join(set(ciphText))
     freq = {}
-    for char in text: 
+    for char in text:
         freq[char] = ciphText.count(char)/len(ciphText)
     return freq
 

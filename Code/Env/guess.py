@@ -28,7 +28,7 @@ class Guess:
             return True
         return False
     
-    #Spurious key occurs
+    #Spurious key occurs, possibly rewrite this method
     def num_words(self):
         """Counts the number of words decrypted in the guess"""
         g = self.guess

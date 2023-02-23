@@ -12,10 +12,13 @@ def analysis():
     for sample in samples:
         kl_divs.append(store_kl_divergence(sample))
     with open("/Users/michaeltsai/Documents/Github/Monoalphabetic-Substitution-Solution/Data/data.txt", 'w') as new_file:
-        new_file.write(kl_divs)
+        new_file.write(str(kl_divs))
 
 def store_kl_divergence(sample):
     """Helper function for analysis."""
     freq = calcFreq(sample)
-    freq = [freq[char] for char in freq]
-    return kl_divergence(freq)
+    freq = list(freq.values())
+    return round(kl_divergence(freq), 2)
+
+if __name__ == "__main__":
+    analysis()
