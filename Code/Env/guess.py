@@ -13,7 +13,7 @@ class Guess:
         freq_list = "etaoinshrdlcumwfgypbvkjxqz"
         desc_order = utils.calcFreq(self.ciph_text)
         chars = []
-        for key, item in desc_order:
+        for key in desc_order.keys():
             chars.append(key)
         guess_desc_order = [freq_list[i] for i in range(len(desc_order))]
         for i in range(len(chars)):
