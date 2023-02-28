@@ -66,6 +66,21 @@ def convert_plaintexts():
         hg = hg.translate(str.maketrans('', '', string.punctuation))
     with open("/Users/michaeltsai/Documents/Github/Monoalphabetic-Substitution-Solution/TrainingData/TheHungerGames.txt", "w") as new_file:
         new_file.write(hg)
+
+def prep_dict():
+    """Removes one character words from the dictionary"""
+    with open("/Users/michaeltsai/Documents/Github/Monoalphabetic-Substitution-Solution/dictionary.txt", 'r') as new_file:
+        words = new_file.read()
+        words = words.split("\n")
+        for word in words:
+            if len(word) == 1:
+                words.remove(word)
+    file = ""
+    for word in words:
+        file += word
+        file += '\n'
+    with open("/Users/michaeltsai/Documents/Github/Monoalphabetic-Substitution-Solution/dictionary.txt", 'w') as new_file:
+        new_file.write(file)
  
 if __name__ == "__main__":
-    convert_plaintexts()
+    prep_dict()

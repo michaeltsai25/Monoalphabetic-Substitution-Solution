@@ -22,9 +22,10 @@ class TestGuess(unittest.TestCase):
         num = num[0]
         self.assertEqual(num, 4)
 
-    def test_swap_general(self):
+    def test_swap_general(self): #make sure in actual algorithm, characters from ct_to_pt will be swapped, not letters in the guess
         g = Guess("test")
-        self.assertEqual(g.swap_general(1), "tset")
+        g.swap_general(1)
+        self.assertEqual(g.guess, "tset")
 
 if __name__ == "__main__":
     unittest.main()

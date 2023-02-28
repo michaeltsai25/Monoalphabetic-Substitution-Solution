@@ -29,16 +29,21 @@ class Guess:
         return False
     
     #Spurious key occurs, possibly rewrite this method
-    def num_words(self):
+    def num_words(self, bool):
         """Counts the number of words decrypted in the guess"""
-        g = self.guess
+        if bool == True:
+            g = self.guess
+        else:
+            g = self.ciph_text
         count = 0
         with open('dictionary.txt', 'r') as new_file:
             file = new_file.read()
             word_list = file.split("\n")
             for word in word_list:
-                if word in self.guess:
-                    g.replace(word, "")
+                if word in g: #self.guess:
+                    print(g)
+                    print(word)
+                    g = g.replace(word, "")
                     count += 1
         return count, g
 
@@ -61,3 +66,7 @@ class Guess:
         list1 = []
         list1[:0] = string
         return list1
+
+if __name__ == "__main__":
+    g = Guess("asdfghwertyuiiuytre")
+    print(g.num_words(False))
