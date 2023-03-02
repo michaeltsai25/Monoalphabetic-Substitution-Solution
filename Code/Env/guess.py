@@ -21,20 +21,24 @@ class Guess:
         for char in self.ciph_text:
             self.guess += self.ct_to_pt[char]
 
-    def decrypted(self):
+    def decrypted(self, test=False):
         """Checks to see if the guess is decrypted"""
+        if test == True:
+            g = self.ciph_text
+        else:
+            g = self.guess
         count, g = self.num_words()
         if len(g) == 0:
             return True
         return False
     
     #Spurious key occurs, possibly rewrite this method
-    def num_words(self, bool):
+    def num_words(self, test=False):
         """Counts the number of words decrypted in the guess"""
-        if bool == True:
-            g = self.guess
-        else:
+        if test == True:
             g = self.ciph_text
+        else:
+            g = self.guess
         count = 0
         with open('dictionary.txt', 'r') as new_file:
             file = new_file.read()
@@ -48,25 +52,19 @@ class Guess:
         return count, g
 
     def random_swap_neigh_chars(self):
-        """Randomly swaps neighboring letters in the guess"""
-        x = randint(0, len(self.guess)-1)
-        self.swap_general(x)
-        return x
+       ct_list = self.ct_to_pt.keys()
+       pt_list = self.ct_to_pt.values()
+       x = randint(0, len(ct_list))
+       self.swap_general(ct_list, pt_list, x)
 
-    def swap_general(self, x):
+    def swap_general(self, ct_list, pt_list, x):
         """Swaps two neighboring letters"""
-        g = self.Convert(self.guess)
-        char = g[x]
-        g[x] = g[x+1]
-        g[x+1] = char
-        self.guess = "".join(g)
-
-    def Convert(self, string):
-        """Helper function for random_swap_neigh_chars, converts a string to a list of chars"""
-        list1 = []
-        list1[:0] = string
-        return list1
+        char = ct_list[x]
+        ct_list[x] = ct_list[x+1]
+        ct_list[x+1] = char
+        for i in range(len(ct_list)):
+            self.ct_to_pt[ct_list[i]] = pt_list[i]
 
 if __name__ == "__main__":
-    g = Guess("asdfghwertyuiiuytre")
-    print(g.num_words(False))
+    g = Guess("thisisatest")
+    print(g.num_words(test=True))

@@ -48,13 +48,13 @@ def str_to_list_2(string):
             ss = i+2
     return l
 
-def convert_plaintexts():
+def convert_plaintexts(no_spaces, name):
     hg = ""
-    with open("/Users/michaeltsai/Documents/Github/Monoalphabetic-Substitution-Solution/TrainingData/TheHungerGames.txt", 'r') as new_file:
+    with open(f"/Users/michaeltsai/Documents/Github/Monoalphabetic-Substitution-Solution/TrainingData/{name}", 'r') as new_file:
         hg = new_file.read()
-        hg = "".join(hg.split())
         hg = hg.lower()
-        hg.replace(' ', '')
+        if no_spaces == True:
+            hg = "".join(hg.split())
         count = 0
         length = len(hg)
         for i in range(len(hg)):
@@ -64,11 +64,12 @@ def convert_plaintexts():
                 hg = ss1+'\n'+ss2
                 count = i
         hg = hg.translate(str.maketrans('', '', string.punctuation))
-    with open("/Users/michaeltsai/Documents/Github/Monoalphabetic-Substitution-Solution/TrainingData/TheHungerGames.txt", "w") as new_file:
+    with open(f"/Users/michaeltsai/Documents/Github/Monoalphabetic-Substitution-Solution/TrainingData/{name}", "w") as new_file:
         new_file.write(hg)
 
+"""
 def prep_dict():
-    """Removes one character words from the dictionary"""
+    Removes one character words from the dictionary
     with open("/Users/michaeltsai/Documents/Github/Monoalphabetic-Substitution-Solution/dictionary.txt", 'r') as new_file:
         words = new_file.read()
         words = words.split("\n")
@@ -81,6 +82,37 @@ def prep_dict():
         file += '\n'
     with open("/Users/michaeltsai/Documents/Github/Monoalphabetic-Substitution-Solution/dictionary.txt", 'w') as new_file:
         new_file.write(file)
- 
+"""
+
+def exclude_unc_words():
+    with open("TrainingData/HungerGamesTest.txt", 'r') as new_file:
+        hg = new_file.read()
+    with open("dictionary.txt", 'r') as new_file: 
+        dic = new_file.read()
+        dic = dic.split('\n')
+    com_words = ""
+    for word in dic:
+        if word in hg:
+            com_words += word
+            com_words += '\n'
+    with open("com_word_dic.txt", 'w') as new_file:
+        new_file.write(com_words)
+
+def prep_dict():
+    with open("/Users/michaeltsai/Documents/GitHub/Monoalphabetic-Substitution-Solution/com_word_dic.txt", 'r') as new_file:
+        dic = new_file.read()
+        dic = dic.split("\n")
+    for word in dic:
+        for w in dic:
+            if word in w and word != w:
+                dic.remove(word)
+    str_dic = ""
+    for word in dic:
+        str_dic += word
+        str_dic += "\n"
+    with open("/Users/michaeltsai/Documents/GitHub/Monoalphabetic-Substitution-Solution/com_word_dic.txt", 'w') as new_file:
+        new_file.write(str_dic)
+
 if __name__ == "__main__":
+    #convert_plaintexts(False, "HungerGamesTest.txt")
     prep_dict()
