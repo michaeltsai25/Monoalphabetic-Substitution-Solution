@@ -32,15 +32,16 @@ class Guess:
             return True
         return False
     
+    """
     #Spurious key occurs, possibly rewrite this method
     def num_words(self, test=False):
-        """Counts the number of words decrypted in the guess"""
+        Counts the number of words decrypted in the guess
         if test == True:
             g = self.ciph_text
         else:
             g = self.guess
         count = 0
-        with open('dictionary.txt', 'r') as new_file:
+        with open('com_word_dic.txt', 'r') as new_file:
             file = new_file.read()
             word_list = file.split("\n")
             for word in word_list:
@@ -51,6 +52,61 @@ class Guess:
                     count += 1
         return count, g
 
+    """
+
+    def num_words(self, test=False): #there are some mad bugs in this code
+        """Counts the number of words decrypted so far in the guess"""
+        dic = self.__read_dictionary()
+        num = 0
+        if test:
+            text = self.ciph_text
+        else:
+            text = self.guess
+        x = 0
+        i = 0
+        while i < len(text):
+            print(text[x:i])
+            print(f"x={x}, i={i}")
+            try:
+                index = dic.index(text[x:i])
+                i = self.__part_of_larger_word(text, x, i)
+                x = i+1
+                num += 1
+                continue
+            except:
+                i += 1
+        return num
+
+    def __part_of_larger_word(self, text, x, i):
+        rel_words = self.__get_rel_words(text[x:i])
+        j = i
+        str_rel = ""
+        for word in rel_words:
+            str_rel += word
+            str_rel += " "
+        while text[x:j] in str_rel:
+            j += 1
+        j = j-1
+        if rel_words.index(text[x:j]) != -1:
+            return j
+        else: 
+            return i
+        
+    def __get_rel_words(self, word):
+        dic = self.__read_dictionary()
+        lower = dic.index(word)
+        upper = dic.index(word)
+        while word in dic[upper]:
+            upper += 1
+        rel_words = dic[lower:upper]
+        return rel_words
+
+    def __read_dictionary(self):
+        with open("/Users/michaeltsai/Documents/GitHub/Monoalphabetic-Substitution-Solution/com_word_dic.txt", 'r') as new_file:
+            dic = new_file.read()
+            dic = dic.split('\n')
+        return dic
+    
     def random_swap_neigh_chars(self):
        ct_list = self.ct_to_pt.keys()
        pt_list = self.ct_to_pt.values()
@@ -66,5 +122,5 @@ class Guess:
             self.ct_to_pt[ct_list[i]] = pt_list[i]
 
 if __name__ == "__main__":
-    g = Guess("thisisatest")
+    g = Guess("cocoonedinmymothersbodytheircheekspressedtogether")
     print(g.num_words(test=True))

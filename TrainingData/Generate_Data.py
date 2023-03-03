@@ -102,10 +102,28 @@ def prep_dict():
     with open("/Users/michaeltsai/Documents/GitHub/Monoalphabetic-Substitution-Solution/com_word_dic.txt", 'r') as new_file:
         dic = new_file.read()
         dic = dic.split("\n")
+    for i in  range(len(dic)):
+        for j in range(i+1, len(dic)): #doesn't work, but eventually edits the file if it is run enough times
+            try:
+                if dic[i] in dic[j]:
+                    dic.remove(dic[i])
+            except IndexError:
+                print(f"i={i}")
+                print(f"j={j}")
+    str_dic = ""
     for word in dic:
-        for w in dic:
-            if word in w and word != w:
-                dic.remove(word)
+        str_dic += word
+        str_dic += "\n"
+    with open("/Users/michaeltsai/Documents/GitHub/Monoalphabetic-Substitution-Solution/com_word_dic.txt", 'w') as new_file:
+        new_file.write(str_dic)
+
+def rem_one_letter_chars():
+    with open("/Users/michaeltsai/Documents/GitHub/Monoalphabetic-Substitution-Solution/com_word_dic.txt", 'r') as new_file:
+        dic = new_file.read()
+        dic = dic.split("\n")
+    for char in dic:
+        if len(char) == 1:
+            dic.remove(char)
     str_dic = ""
     for word in dic:
         str_dic += word
@@ -115,4 +133,4 @@ def prep_dict():
 
 if __name__ == "__main__":
     #convert_plaintexts(False, "HungerGamesTest.txt")
-    prep_dict()
+    rem_one_letter_chars()
