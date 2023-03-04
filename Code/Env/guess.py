@@ -54,7 +54,7 @@ class Guess:
 
     """
 
-    def num_words(self, test=False): #there are some mad bugs in this code
+    def num_words(self, test=False): #works if words are all at the front of the text, need to edit
         """Counts the number of words decrypted so far in the guess"""
         dic = self.__read_dictionary()
         num = 0
@@ -65,16 +65,19 @@ class Guess:
         x = 0
         i = 0
         while i < len(text):
-            print(text[x:i])
-            print(f"x={x}, i={i}")
             try:
                 index = dic.index(text[x:i])
                 i = self.__part_of_larger_word(text, x, i)
-                x = i+1
+                x = i
                 num += 1
                 continue
             except:
                 i += 1
+        try:
+            dic.index(text[x:i])
+            num += 1
+        except:
+            pass
         return num
 
     def __part_of_larger_word(self, text, x, i):
@@ -84,12 +87,12 @@ class Guess:
         for word in rel_words:
             str_rel += word
             str_rel += " "
-        while text[x:j] in str_rel:
+        while text[x:j] in str_rel and j != len(text):
             j += 1
         j = j-1
         if rel_words.index(text[x:j]) != -1:
             return j
-        else: 
+        else:
             return i
         
     def __get_rel_words(self, word):
@@ -122,5 +125,5 @@ class Guess:
             self.ct_to_pt[ct_list[i]] = pt_list[i]
 
 if __name__ == "__main__":
-    g = Guess("cocoonedinmymothersbodytheircheekspressedtogether")
+    g = Guess("testonefjfjfjfjtesttwo")
     print(g.num_words(test=True))
