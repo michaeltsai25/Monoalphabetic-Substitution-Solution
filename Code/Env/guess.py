@@ -1,5 +1,6 @@
 import utils
 from random import randint
+from polyglot.text import Text
 
 class Guess:
     def __init__(self, ciphertext):
@@ -54,20 +55,63 @@ class Guess:
 
     """
 
-    def num_words(self, test=False): #works if words are all at the front of the text, need to edit
-        """Counts the number of words decrypted so far in the guess"""
-        dic = self.__read_dictionary()
-        num = 0
+    def num_words_two(self, test=False):
+        if test:
+            blob = self.ciph_text
+        else:
+            blob = self.guess
+        text = Text(blob)
+        text.language = "en"
+        words = text.morphemes
+        print(words)
+        return len(words)
+        
+
+    def num_words_main(self, test=False): #function needs work, check output
+        total = []
         if test:
             text = self.ciph_text
         else:
             text = self.guess
+        for start in range(len(text)):
+            words = self.num_words_start(text[start:len(text)])
+            if len(words) > 0:
+                total.append(words)
+        total = self.__rem_duplicates(total)
+        num = 0
+        for i in range(len(total)):
+            for j in range(len(total[i])):
+                num += 1
+        print(total)
+        return num
+
+    def __rem_duplicates(self, total:list):
+        total.reverse()
+        for i in range(len(total)):
+            for j in range(i+1, len(total)):
+                if self.__contains_list(total[i], total[j]):
+                    total.remove(total[i])
+        return total
+    
+    def __contains_list(self, shorter, longer):
+        for i in range(len(shorter)):
+            if shorter[i] != longer[i]:
+                return False
+        return True
+
+
+    def num_words_start(self, text): #works if words are all at the front of the text, need to edit
+        """Counts the number of words decrypted so far in the guess"""
+        dic = self.__read_dictionary()
+        num = 0
         x = 0
         i = 0
+        words = []
         while i < len(text):
             try:
                 index = dic.index(text[x:i])
                 i = self.__part_of_larger_word(text, x, i)
+                words.append(text[x:i])
                 x = i
                 num += 1
                 continue
@@ -75,10 +119,11 @@ class Guess:
                 i += 1
         try:
             dic.index(text[x:i])
+            words.append(text[x:i])
             num += 1
         except:
             pass
-        return num
+        return words
 
     def __part_of_larger_word(self, text, x, i):
         rel_words = self.__get_rel_words(text[x:i])
@@ -125,5 +170,7 @@ class Guess:
             self.ct_to_pt[ct_list[i]] = pt_list[i]
 
 if __name__ == "__main__":
-    g = Guess("testonefjfjfjfjtesttwo")
-    print(g.num_words(test=True))
+    g = Guess("ofcourseshedidthisjasdkhgisthedayofthereaping")
+    print(g.num_words_two(test=True))
+    #thisjitiyeuyyftteyyfueisatest
+    #jfhteisajshdyetest
