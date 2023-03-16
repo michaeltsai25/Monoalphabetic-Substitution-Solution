@@ -6,6 +6,7 @@ class Guess:
     def __init__(self, ciphertext):
         self.ciph_text = ciphertext.replace(" ", "")
         self.guess = ""
+        self.ciph = ciphertext
         self.ct_to_pt = {}
         self.reset()
 
@@ -34,6 +35,7 @@ class Guess:
         return False
  
     def num_words(self, test=False):
+        """Counts the number of words decrypted in the ciphertext"""
         if test:
             blob = self.ciph_text
         else:
@@ -69,6 +71,11 @@ class Guess:
         ct_list[x+1] = char
         for i in range(len(ct_list)):
             self.ct_to_pt[ct_list[i]] = pt_list[i]
+
+    def decode_ct(self):
+        """Encodes the ciphertext with the proposed plaintext given the key"""
+        for ct, pt in self.ct_to_pt.items():
+            self.ciph.replace(ct, pt)
 
 if __name__ == "__main__":
     g = Guess("underawoodenbowlthisisatestjjfhftoprotectitfromhungryratsandcatsalike")
