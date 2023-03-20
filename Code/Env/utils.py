@@ -1,4 +1,3 @@
-from math import log
 from scipy.special import rel_entr
 from constants import DISTR_ENG_LETTERS
 import os
@@ -30,4 +29,4 @@ def read_data(name):
     return data
 
 if __name__ == "__main__":
-    print(kl_divergence([0.5, 0.5], [0.25, 0.25]))
+    print(kl_divergence([0.127020, 0.0556786]))
