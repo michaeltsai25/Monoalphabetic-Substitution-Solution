@@ -29,7 +29,7 @@ class Guess:
             g = self.ciph_text
         else:
             g = self.guess
-        count, g = self.num_words()
+        num = self.num_words()
         if len(g) == 0:
             return True
         return False
@@ -63,9 +63,12 @@ class Guess:
        pt_list = self.ct_to_pt.values()
        x = randint(0, len(ct_list))
        self.swap_general(ct_list, pt_list, x)
+       return x
 
-    def swap_general(self, ct_list, pt_list, x):
+    def swap_general(self, x):
         """Swaps two neighboring letters"""
+        ct_list = self.ct_to_pt.keys()
+        pt_list = self.ct_to_pt.values()
         char = ct_list[x]
         ct_list[x] = ct_list[x+1]
         ct_list[x+1] = char

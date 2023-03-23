@@ -1,8 +1,8 @@
 import sys
 sys.path.append("./Code/Env")
 from guess import Guess
-from constants import MAX_KL_DIV
-from utils import kl_divergence
+from constants import *
+from utils import *
 
 class Runner:
     #is a class necessary here?
@@ -11,11 +11,13 @@ class Runner:
 
     def main(self):
         guess = Guess(self.ct)
-        num_words = 0
         while not guess.decrypted():
+            count = 0
+            n = guess.num_words()
             x = guess.random_swap_neigh_chars()
-            count, g = guess.num_words()
-            if count < num_words: #also add the business about the kl divergence
+            if guess.num_words() < n or kl_divergence(calcFreq(guess.guess).values()) > MAX_KL_DIV:
                 guess.swap_general(x)
-            num_words = count
-        return guess.guess
+            if count > MAX_ITER and guess.num_words() < MIN_WORDS:
+                guess.reset()
+            count += 1
+            print(guess.guess) #just to track the evolution of the algorithm's guesses, may remove if desired
