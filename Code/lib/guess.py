@@ -3,7 +3,7 @@ from random import randint
 from polyglot.text import Text
 
 class Guess:
-    def __init__(self, ciphertext):
+    def __init__(self, ciphertext:str):
         self.ciph_text = ciphertext.replace(" ", "")
         self.guess = ""
         self.ciph = ciphertext
@@ -77,9 +77,11 @@ class Guess:
 
     def decode_ct(self):
         """Encodes the ciphertext with the proposed plaintext given the key"""
+        c = self.ciph
         for ct, pt in self.ct_to_pt.items():
-            self.guess.replace(ct, pt)
+            c.replace(ct, pt)
+        self.guess = c
 
 if __name__ == "__main__":
-    g = Guess("mymotherwasverybeautifulonce")
-    print(g.num_words(test=True))
+    g = Guess("test")
+    print(g.swap_general(1, test=True))
