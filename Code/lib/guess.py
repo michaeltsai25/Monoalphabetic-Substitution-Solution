@@ -60,15 +60,14 @@ class Guess:
     
     def random_swap_neigh_chars(self):
        ct_list = self.ct_to_pt.keys()
-       pt_list = self.ct_to_pt.values()
        x = randint(0, len(ct_list))
        self.swap_general(x)
        return x
 
     def swap_general(self, x, test=False):
         """Swaps two neighboring letters"""
-        ct_list = self.ct_to_pt.keys()
-        pt_list = self.ct_to_pt.values()
+        ct_list = list(self.ct_to_pt.keys())
+        pt_list = list(self.ct_to_pt.values())
         char = pt_list[x]
         pt_list[x] = pt_list[x+1]
         pt_list[x+1] = char
@@ -79,10 +78,12 @@ class Guess:
     def decode_ct(self):
         """Encodes the ciphertext with the proposed plaintext given the key"""
         for ct, pt in self.ct_to_pt.items():
-            self.ciph.replace(ct, pt)
+            self.guess.replace(ct, pt)
 
 if __name__ == "__main__":
-    g = Guess("underawoodenbowlthisisatestjjfhftoprotectitfromhungryratsandcatsalike")
-    print(g.num_words(test=True))
+    g = Guess("test")
+    print(g.guess)
+    g.swap_general(1)
+    print(g.guess)
     #thisjitiyeuyyftteyyfueisatest
     #jfhteisajshdyetest
