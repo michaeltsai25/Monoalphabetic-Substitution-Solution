@@ -62,18 +62,19 @@ class Guess:
        ct_list = self.ct_to_pt.keys()
        pt_list = self.ct_to_pt.values()
        x = randint(0, len(ct_list))
-       self.swap_general(ct_list, pt_list, x)
+       self.swap_general(x)
        return x
 
-    def swap_general(self, x):
+    def swap_general(self, x, test=False):
         """Swaps two neighboring letters"""
         ct_list = self.ct_to_pt.keys()
         pt_list = self.ct_to_pt.values()
-        char = ct_list[x]
-        ct_list[x] = ct_list[x+1]
-        ct_list[x+1] = char
+        char = pt_list[x]
+        pt_list[x] = pt_list[x+1]
+        pt_list[x+1] = char
         for i in range(len(ct_list)):
             self.ct_to_pt[ct_list[i]] = pt_list[i]
+        self.decode_ct()
 
     def decode_ct(self):
         """Encodes the ciphertext with the proposed plaintext given the key"""
