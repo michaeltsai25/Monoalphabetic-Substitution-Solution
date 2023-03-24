@@ -43,14 +43,14 @@ class Guess:
         text = Text(blob)
         text.language = "en"
         words = text.morphemes
-        wordz = []
+        word_list = []
         dictionary = self.__read_dictionary()
         for word in words:
             if word in dictionary:
                 if len(word) >= 1 or word == 'a' or word == 'i':
-                    wordz.append(word)
-        print(wordz)
-        return len(wordz)
+                    word_list.append(word)
+        print(word_list)
+        return len(word_list)
 
     def __read_dictionary(self):
         with open("/Users/michaeltsai/Documents/GitHub/Monoalphabetic-Substitution-Solution/com_word_dic.txt", 'r') as new_file:
@@ -81,9 +81,5 @@ class Guess:
             self.guess.replace(ct, pt)
 
 if __name__ == "__main__":
-    g = Guess("test")
-    print(g.guess)
-    g.swap_general(1)
-    print(g.guess)
-    #thisjitiyeuyyftteyyfueisatest
-    #jfhteisajshdyetest
+    g = Guess("mymotherwasverybeautifulonce")
+    print(g.num_words(test=True))

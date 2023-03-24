@@ -18,7 +18,7 @@ class TestGuess(unittest.TestCase):
 
     def test_num_words(self):
         g = Guess("thisgdhfyeiseuyatest")
-        num = g.num_words()
+        num = g.num_words(test=True)
         self.assertEqual(num, 4)
 
     def test_swap_general(self): #make sure in actual algorithm, characters from ct_to_pt will be swapped, not letters in the guess

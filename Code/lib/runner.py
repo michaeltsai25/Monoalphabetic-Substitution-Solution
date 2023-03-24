@@ -1,5 +1,5 @@
 import sys
-sys.path.append("./Code/Env")
+sys.path.append("./Code/lib")
 from guess import Guess
 from constants import *
 from utils import *
