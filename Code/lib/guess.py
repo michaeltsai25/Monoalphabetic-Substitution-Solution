@@ -25,16 +25,15 @@ class Guess:
 
     def decrypted(self, test=False):
         """Checks to see if the guess is decrypted"""
-        if test == True:
-            g = self.ciph_text
-        else:
-            g = self.guess
-        num = self.num_words()
-        if len(g) == 0:
+        word_list = self.num_words(get_words=True)
+        ct = self.ciph
+        for word in word_list:
+            ct.replace(word, "")
+        if len(ct) == 0:
             return True
         return False
  
-    def num_words(self, test=False):
+    def num_words(self, test=False, get_words=False):
         """Counts the number of words decrypted in the ciphertext"""
         if test:
             blob = self.ciph_text
@@ -50,6 +49,8 @@ class Guess:
                 if len(word) >= 1 or word == 'a' or word == 'i':
                     word_list.append(word)
         print(word_list)
+        if get_words:
+            return word_list
         return len(word_list)
 
     def __read_dictionary(self):
