@@ -21,3 +21,6 @@ class Runner:
                 guess.reset()
             count += 1
             print(guess.guess) #just to track the evolution of the algorithm's guesses, may remove if desired
+
+if __name__ == "__main__":
+    r = Runner()

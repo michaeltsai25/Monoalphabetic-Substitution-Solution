@@ -28,5 +28,18 @@ def read_data(name):
         data = [float(point) for point in data]
     return data
 
+def read_dictionary():
+    return read_file("dictionary.txt")
+
+def read_plaintext():
+    return read_file("TrainingData/TheHungerGames.txt")
+
+def read_file(file):
+    """Helper function for read_dictionary and read_plaintext"""
+    with open(file, 'r') as new_file:
+        dic = new_file.read()
+        dic = dic.split('\n')
+    return dic
+
 if __name__ == "__main__":
     print(kl_divergence([0.127020, 0.0556786]))

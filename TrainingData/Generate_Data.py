@@ -1,5 +1,8 @@
 import string
 from random import randint
+import sys
+sys.path.append("./Code/lib")
+from utils import read_plaintext
 
 def encrypt_plaintext(key, plaintext):
     """Takes in a string key and plaintext and encrypts the plaintext with the key"""
@@ -30,23 +33,12 @@ def generate_key():
 
 def encrypt_text_file():
     """Encrypts text files with random keys"""
-    with open("The Hunger Games.txt", 'r') as new_file:
-        pt = str(new_file.read())
-    ptl = str_to_list_2(pt)
+    ptl = read_plaintext()
     with open("trainingdata.txt", "w") as data:
         for item in ptl: 
             key = generate_key()
             data.write(encrypt_plaintext(key, item))
             data.write(f"\n{key}\n\n")
-    
-def str_to_list_2(string):
-    l = []
-    ss = 0
-    for i in range(len(string)):
-        if string[i: i+1] == "\n":
-            l.append(string[ss:i])
-            ss = i+2
-    return l
 
 def convert_plaintexts(no_spaces, name):
     hg = ""
@@ -128,9 +120,22 @@ def rem_one_letter_chars():
     for word in dic:
         str_dic += word
         str_dic += "\n"
-    with open("/Users/michaeltsai/Documents/GitHub/Monoalphabetic-Substitution-Solution/com_word_dic.txt", 'w') as new_file:
+    with open("com_word_dic.txt", 'w') as new_file:
         new_file.write(str_dic)
+
+def clean_pt():
+    pt = read_plaintext()
+    for i in range(len(pt)):
+        for char in "0123456789":
+            if char in pt[i]:
+                pt[i] = pt[i].replace(char, "")
+    data = ""
+    for text in pt:
+        data += text
+        data += "\n"
+    with open("TrainingData/TheHungerGames.txt", 'w') as new_file:
+        new_file.write(data)
 
 if __name__ == "__main__":
     #convert_plaintexts(False, "HungerGamesTest.txt")
-    rem_one_letter_chars()
+    encrypt_text_file()

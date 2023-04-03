@@ -1,4 +1,4 @@
-import utils
+from utils import calcFreq, read_dictionary
 from random import randint
 from polyglot.text import Text
 
@@ -13,7 +13,7 @@ class Guess:
     def reset(self):
         """Initializes the guess based on frequencies, modifies ct_to_pt as necessary"""
         freq_list = "etaoinshrdlcumwfgypbvkjxqz"
-        desc_order = utils.calcFreq(self.ciph_text)
+        desc_order = calcFreq(self.ciph_text)
         chars = []
         for key in desc_order.keys():
             chars.append(key)
@@ -43,7 +43,7 @@ class Guess:
         text.language = "en"
         words = text.morphemes
         word_list = []
-        dictionary = self.__read_dictionary()
+        dictionary = read_dictionary()
         for word in words:
             if word in dictionary:
                 if len(word) >= 1 or word == 'a' or word == 'i':
@@ -52,12 +52,6 @@ class Guess:
         if get_words:
             return word_list
         return len(word_list)
-
-    def __read_dictionary(self):
-        with open("/Users/michaeltsai/Documents/GitHub/Monoalphabetic-Substitution-Solution/com_word_dic.txt", 'r') as new_file:
-            dic = new_file.read()
-            dic = dic.split('\n')
-        return dic
     
     def random_swap_neigh_chars(self):
        ct_list = self.ct_to_pt.keys()
@@ -84,6 +78,6 @@ class Guess:
         self.guess = c
 
 if __name__ == "__main__":
-    g = Guess("test")
-    print(g.swap_general(1, test=True))
+    g = Guess("mymotherwasverybeautifulonce")
+    print(g.num_words(test=True, get_words=False))
     #testing git using command line
