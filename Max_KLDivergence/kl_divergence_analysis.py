@@ -3,6 +3,7 @@ sys.path.append("./Code/Env")
 from utils import *
 from constants import DISTR_ENG_LETTERS
 from statistics import mean
+from scipy.special import kl_div
 
 def analysis():
     """Stores a list of all of the kl-divergences in a text file."""
@@ -19,7 +20,7 @@ def store_kl_divergence(sample):
     """Helper function for analysis."""
     freq = calcFreq(sample)
     freq = list(freq.values())
-    return round(kl_divergence(freq), 2)
+    return round(kl_div(freq), 2)
 
 def sampling_distr():
     data = read_data("Distr_data.txt")
