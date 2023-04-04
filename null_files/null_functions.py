@@ -1,4 +1,9 @@
 #Spurious key occurs, possibly rewrite this method
+import sys
+sys.path.append("Code/lib/utils.py")
+from scipy.special import rel_entr
+from constants import DISTR_ENG_LETTERS
+
 def num_words(self, test=False):
     """Counts the number of words decrypted in the guess"""
     if test == True:
@@ -98,3 +103,7 @@ def __get_rel_words(self, word):
         upper += 1
     rel_words = dic[lower:upper]
     return rel_words
+
+def kl_divergence(cipherDistr):
+    """Calculates the KL-Divergence from the input distribution to the distribution of letters in the English language"""
+    return sum(rel_entr(cipherDistr, DISTR_ENG_LETTERS[0:len(cipherDistr)]))

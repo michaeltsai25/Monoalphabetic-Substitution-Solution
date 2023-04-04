@@ -1,10 +1,4 @@
-from scipy.special import rel_entr
-from constants import DISTR_ENG_LETTERS
 import os
-
-def kl_divergence(cipherDistr):
-    """Calculates the KL-Divergence from the input distribution to the distribution of letters in the English language"""
-    return sum(rel_entr(cipherDistr, DISTR_ENG_LETTERS[0:len(cipherDistr)]))
 
 def calcFreq(ciphText):
     """Orders the characters in the text from least common to most common"""
@@ -42,4 +36,4 @@ def read_file(file):
     return dic
 
 if __name__ == "__main__":
-    print(kl_divergence([0.127020, 0.0556786]))
+    pass
