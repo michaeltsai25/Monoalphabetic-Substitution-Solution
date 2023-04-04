@@ -11,7 +11,7 @@ class Runner:
 
     def main(self):
         guess = Guess(self.ct)
-        while not guess.decrypted():
+        while not guess.decrypted() or guess.guess == "wheniwakeuptheothersideofthebediscold":
             count = 0
             n = guess.num_words()
             x = guess.random_swap_neigh_chars()
@@ -21,6 +21,8 @@ class Runner:
                 guess.reset()
             count += 1
             print(guess.guess) #just to track the evolution of the algorithm's guesses, may remove if desired
+        return guess.guess
 
 if __name__ == "__main__":
-    r = Runner()
+    r = Runner("mteormiqeslntegntevjrwegunteaewrjcgxw")
+    r.main()
