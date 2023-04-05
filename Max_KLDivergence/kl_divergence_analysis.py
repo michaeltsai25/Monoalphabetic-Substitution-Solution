@@ -1,6 +1,6 @@
 import sys
-sys.path.append("./Code/Env")
-from utils import *
+sys.path.append("./Code/lib")
+from utils import calcFreq, read_data
 from constants import DISTR_ENG_LETTERS
 from statistics import mean
 from scipy.special import kl_div

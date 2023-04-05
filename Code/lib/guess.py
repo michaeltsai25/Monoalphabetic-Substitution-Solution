@@ -48,7 +48,6 @@ class Guess:
             if word in dictionary:
                 if len(word) >= 1 or word == 'a' or word == 'i':
                     word_list.append(word)
-        print(word_list)
         if get_words:
             return word_list
         return len(word_list)
