@@ -3,7 +3,6 @@ sys.path.append("./Code/lib")
 from guess import Guess
 from constants import *
 from utils import *
-from scipy.special import kl_div
 
 class Runner:
     #is a class necessary here?
@@ -17,7 +16,7 @@ class Runner:
             n = guess.num_words()
             x = guess.random_swap_neigh_chars()
             freq = [value for value in calcFreq(guess.guess).values()]
-            if guess.num_words() < n or kl_div(freq, DISTR_ENG_LETTERS[0:len(freq)]) > MAX_KL_DIV:
+            if guess.num_words() < n or kl_divergence(freq) > MAX_KL_DIV:
                 guess.swap_general(x)
             if count > MAX_ITER and guess.num_words() < MIN_WORDS:
                 guess.reset()
