@@ -54,7 +54,7 @@ class Guess:
     
     def random_swap_neigh_chars(self):
        ct_list = self.ct_to_pt.keys()
-       x = randint(0, len(ct_list))
+       x = randint(0, len(ct_list)-2)
        self.swap_general(x)
        return x
 
@@ -63,7 +63,11 @@ class Guess:
         ct_list = list(self.ct_to_pt.keys())
         pt_list = list(self.ct_to_pt.values())
         char = pt_list[x]
-        pt_list[x] = pt_list[x+1]
+        try:
+            pt_list[x] = pt_list[x+1]
+        except IndexError:
+            print(x)
+            return
         pt_list[x+1] = char
         for i in range(len(ct_list)):
             self.ct_to_pt[ct_list[i]] = pt_list[i]
@@ -78,5 +82,5 @@ class Guess:
 
 if __name__ == "__main__":
     g = Guess("mymotherwasverybeautifulonce")
-    print(g.num_words(test=True, get_words=False))
+    g.random_swap_neigh_chars()
     #testing git using command line
