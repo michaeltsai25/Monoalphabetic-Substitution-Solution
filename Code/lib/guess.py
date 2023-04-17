@@ -77,7 +77,7 @@ class Guess:
         """Encodes the ciphertext with the proposed plaintext given the key"""
         c = self.ciph
         for ct, pt in self.ct_to_pt.items():
-            c.replace(ct, pt)
+            c = c.replace(ct, pt)
         self.guess = c
 
 if __name__ == "__main__":

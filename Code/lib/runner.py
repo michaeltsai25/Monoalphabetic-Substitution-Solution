@@ -21,7 +21,7 @@ class Runner:
             if count > MAX_ITER and guess.num_words() < MIN_WORDS:
                 guess.reset()
             count += 1
-            #print(guess.guess) #just to track the evolution of the algorithm's guesses, may remove if desired
+            print(guess.guess) #just to track the evolution of the algorithm's guesses, may remove if desired
         return guess.guess
 
 if __name__ == "__main__":
