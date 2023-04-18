@@ -11,8 +11,8 @@ class Runner:
 
     def main(self):
         guess = Guess(self.ct)
+        count = 0
         while not guess.decrypted() or guess.guess == "wheniwakeuptheothersideofthebediscold":
-            count = 0
             n = guess.num_words()
             x = guess.random_swap_neigh_chars()
             freq = [value for value in calcFreq(guess.guess).values()]
@@ -20,7 +20,7 @@ class Runner:
                 guess.swap_general(x)
             if count > MAX_ITER and guess.num_words() < MIN_WORDS:
                 guess.reset()
-            count += 1
+            count += 1 #count doesn't work, have to adjust logic
             print(guess.guess) #just to track the evolution of the algorithm's guesses, may remove if desired
         return guess.guess
 
