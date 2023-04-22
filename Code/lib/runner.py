@@ -12,6 +12,8 @@ class Runner:
     def main(self):
         guess = Guess(self.ct)
         count = 0
+        c = 0
+        last  = ""
         while not guess.decrypted() or guess.guess == "wheniwakeuptheothersideofthebediscold":
             n = guess.num_words()
             x = guess.random_swap_neigh_chars()
@@ -20,8 +22,14 @@ class Runner:
                 guess.swap_general(x)
             if count > MAX_ITER and guess.num_words() < MIN_WORDS:
                 guess.reset()
-            count += 1 #count doesn't work, have to adjust logic
-            print(guess.guess) #just to track the evolution of the algorithm's guesses, may remove if desired
+            #count += 1 #count doesn't work, have to adjust logic
+            c += 1
+            if c >= 100:
+                break
+            if not guess.guess == last:
+                print(guess.guess) #just to track the evolution of the algorithm's guesses, may remove if desired
+                print(guess.ct_to_pt)
+                last = guess.guess
         return guess.guess
 
 if __name__ == "__main__":
