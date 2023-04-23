@@ -37,6 +37,7 @@ def encrypt_text_file():
     with open("trainingdata.txt", "w") as data:
         for item in ptl: 
             key = generate_key()
+            data.write(item + "\n")
             data.write(encrypt_plaintext(key, item))
             data.write(f"\n{key}\n\n")
 
@@ -151,4 +152,4 @@ def increase_training_data_len():
 
 if __name__ == "__main__":
     #convert_plaintexts(False, "HungerGamesTest.txt")
-    increase_training_data_len()
+    encrypt_text_file()
