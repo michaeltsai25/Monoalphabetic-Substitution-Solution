@@ -136,6 +136,19 @@ def clean_pt():
     with open("TrainingData/TheHungerGames.txt", 'w') as new_file:
         new_file.write(data)
 
+def increase_training_data_len():
+    file = read_plaintext()
+    total = ""
+    current = ""
+    for i in range(len(file)):
+        if i%8 == 0:
+            total += current + "\n"
+            current = ""
+        current += file[i]
+        i += 1
+    with open("TrainingData/TheHungerGames.txt", "w") as new_file:
+        new_file.write(total)
+
 if __name__ == "__main__":
     #convert_plaintexts(False, "HungerGamesTest.txt")
-    encrypt_text_file()
+    increase_training_data_len()
