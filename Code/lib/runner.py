@@ -14,7 +14,7 @@ class Runner:
         count = 0
         c = 0
         last  = ""
-        while not guess.decrypted() or guess.guess == "wheniwakeuptheothersideofthebediscold":
+        while not guess.decrypted() or guess.guess == "wheniwakeuptheothersideofthebediscoldmyfingersstretchoutseekingprimswarmthbutfindingonlytheroughcanvascoverofthemattressshemusthavehadbaddreamsandclimbedinwithourmotherofcourseshedidthisisthedayofthereapingmylittlesisterprimcurleduponhersidecocoonedinmymothersbodytheircheekspressedtogetherinsleepmymotherlooksyoungerstillwornbutnotsobeatendown":
             n = guess.num_words()
             x = guess.random_swap_neigh_chars()
             freq = [value for value in calcFreq(guess.guess).values()]
@@ -33,5 +33,5 @@ class Runner:
         return guess.guess
 
 if __name__ == "__main__":
-    r = Runner("mteormiqeslntegntevjrwegunteaewrjcgxw")
+    r = Runner("jkaszjrnacfpkalpkayqzxalbpkadaxzqtlixgebzswayqqpyaptklcpqaanzswfyzgqjrygpkdcpbzsxzswlsiepkaylcwktrshrqtlhaylbpkagrppyaqqqkagcqpkrhakrxdrxxyargqrsxtizgdaxzsjzpklcyglpkaylbtlcyqaqkaxzxpkzqzqpkaxrelbpkayarfzswgeizppiaqzqpayfyzgtcyiaxcflskayqzxatltllsaxzsgeglpkayqdlxepkazytkaanqfyaqqaxplwapkayzsqiaafgeglpkayillnqelcswayqpziijlysdcpslpqldarpasxljs")
     r.main()
