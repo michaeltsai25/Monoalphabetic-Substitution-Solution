@@ -5,7 +5,6 @@ from constants import *
 from utils import *
 
 class Runner:
-    #is a class necessary here?
     def __init__(self, ciphertext):
         self.ct = ciphertext
 
