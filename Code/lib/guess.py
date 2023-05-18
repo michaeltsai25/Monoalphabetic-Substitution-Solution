@@ -73,11 +73,12 @@ class Guess:
             self.ct_to_pt[ct_list[i]] = pt_list[i]
         self.decode_ct()
 
+    #Bug in the code!!!
     def decode_ct(self):
         """Encodes the ciphertext with the proposed plaintext given the key"""
         c = self.ciph
-        for ct, pt in self.ct_to_pt.items():
-            c = c.replace(ct, pt)
+        for i in range(len(c)):
+            c = c[0:i] + self.ct_to_pt[c[i]] + c[i+1:len(c)]
         self.guess = c
 
 if __name__ == "__main__":
