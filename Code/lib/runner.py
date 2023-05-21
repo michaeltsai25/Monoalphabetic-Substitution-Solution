@@ -17,13 +17,13 @@ class Runner:
             n = guess.num_words()
             x = guess.random_swap_neigh_chars()
             freq = [value for value in calcFreq(guess.guess).values()]
-            if guess.num_words() < n or kl_divergence(freq) > MAX_KL_DIV:
+            if guess.num_words() < n or kl_divergence(freq) > MAX_KL_DIV: #loosen constraints
                 guess.swap_general(x)
             if count > MAX_ITER and guess.num_words() < MIN_WORDS:
                 guess.reset()
-            #count += 1 #count doesn't work, have to adjust logic
+            count += 1
             c += 1
-            if c >= 100:
+            if c >= 5000:
                 break
             if not guess.guess == last:
                 print(guess.guess) #just to track the evolution of the algorithm's guesses, may remove if desired
@@ -34,3 +34,4 @@ class Runner:
 if __name__ == "__main__":
     r = Runner("jkaszjrnacfpkalpkayqzxalbpkadaxzqtlixgebzswayqqpyaptklcpqaanzswfyzgqjrygpkdcpbzsxzswlsiepkaylcwktrshrqtlhaylbpkagrppyaqqqkagcqpkrhakrxdrxxyargqrsxtizgdaxzsjzpklcyglpkaylbtlcyqaqkaxzxpkzqzqpkaxrelbpkayarfzswgeizppiaqzqpayfyzgtcyiaxcflskayqzxatltllsaxzsgeglpkayqdlxepkazytkaanqfyaqqaxplwapkayzsqiaafgeglpkayillnqelcswayqpziijlysdcpslpqldarpasxljs")
     r.main()
+    #use larger text

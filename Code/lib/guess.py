@@ -25,6 +25,7 @@ class Guess:
 
     def decrypted(self, test=False):
         """Checks to see if the guess is decrypted"""
+        #compare number of characters
         word_list = self.num_words(get_words=True)
         ct = self.ciph
         for word in word_list:
@@ -35,6 +36,7 @@ class Guess:
  
     def num_words(self, test=False, get_words=False):
         """Counts the number of words decrypted in the ciphertext"""
+        #rewrite, just check dictionary
         if test:
             blob = self.ciph_text
         else:
