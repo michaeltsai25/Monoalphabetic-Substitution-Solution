@@ -34,8 +34,8 @@ def generate_key():
 def encrypt_text_file():
     """Encrypts text files with random keys"""
     ptl = read_plaintext()
-    with open("trainingdata.txt", "w") as data:
-        for item in ptl: 
+    with open("Data/TrainingData/trainingdata.txt", "w") as data:
+        for item in ptl:
             key = generate_key()
             data.write(item + "\n")
             data.write(encrypt_plaintext(key, item))
@@ -142,14 +142,15 @@ def increase_training_data_len():
     total = ""
     current = ""
     for i in range(len(file)):
-        if i%8 == 0:
+        if i%3 == 0:
             total += current + "\n"
             current = ""
         current += file[i]
         i += 1
-    with open("TrainingData/TheHungerGames.txt", "w") as new_file:
+    with open("Data/TrainingData/TheHungerGames.txt", "w") as new_file:
         new_file.write(total)
 
 if __name__ == "__main__":
     #convert_plaintexts(False, "HungerGamesTest.txt")
     encrypt_text_file()
+    #increase_training_data_len()
