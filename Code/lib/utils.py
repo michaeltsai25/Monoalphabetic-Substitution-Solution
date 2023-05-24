@@ -28,7 +28,7 @@ def read_dictionary():
     return read_file("dictionary.txt")
 
 def read_plaintext():
-    return read_file("TrainingData/TheHungerGames.txt")
+    return read_file("Data/TrainingData/Generate_Data.py")
 
 def read_file(file):
     """Helper function for read_dictionary and read_plaintext"""
