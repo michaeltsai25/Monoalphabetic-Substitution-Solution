@@ -37,6 +37,7 @@ class Guess:
     def num_words(self, test=False, get_words=False):
         """Counts the number of words decrypted in the ciphertext"""
         #rewrite, just check dictionary
+        """
         if test:
             blob = self.ciph_text
         else:
@@ -52,7 +53,25 @@ class Guess:
                     word_list.append(word)
         if get_words:
             return word_list
-        return len(word_list)
+        return len(word_list)"""
+        if test:
+            blob = self.ciph_text
+        else:
+            blob = self.guess
+        count = 0
+        word_list = []
+        with open("dictionary.txt", "r") as file:
+            file = file.read()
+            file = file.split("\n")
+            for word in file:
+                if word == 'a' or word == 'i':
+                    continue
+                count += blob.count(word)
+                if word in blob:
+                    word_list.append(word)
+        if get_words:
+            return word_list
+        return count
     
     def random_swap_neigh_chars(self):
        ct_list = self.ct_to_pt.keys()
@@ -85,5 +104,5 @@ class Guess:
 
 if __name__ == "__main__":
     g = Guess("mymotherwasverybeautifulonce")
-    g.random_swap_neigh_chars()
+    g.num_words(test=True)
     #testing git using command line
