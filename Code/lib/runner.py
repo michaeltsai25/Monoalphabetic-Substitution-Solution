@@ -15,15 +15,17 @@ class Runner:
         count = 0
         c = 0
         last  = ""
+        prev_fit=0
         while not guess.decrypted() or guess.guess == "butiftheofficialsfoundouthewouldhavebeenpubliclyexecutedforincitingarebellionmostofthepeacekeepersturnablindeyetothefewofuswhohuntbecausetheyreashungryforfreshmeatasanybodyisinfacttheyreamongourbestcustomersbuttheideathatsomeonemightbearmingtheseamwouldneverhavebeenallowedinthefallafewbravesoulssneakintothewoodstoharvestapplesbutalwaysinsightofthemeadowalwayscloseenoughtorunbacktothesafetyofdistrictiftroublearisesdistricttwelvewhereyoucanstarvetodeathinsafetyimuttertheniglancequicklyovermyshoulderevenhereeveninthemiddleofnowhereyouworrysomeonemightoverhearyouwheniwasyoungeriscaredmymothertodeaththethingsiwouldblurtoutaboutdistrictaboutthepeoplewhoruleourcountrypanemfromthefaroffcitycalledthecapitoleventuallyiunderstoodthiswouldonlyleadustomoretroublesoilearnedtoholdmytongueandtoturnmyfeaturesintoanindifferentmasksothatnoonecouldeverreadmythoughtsdomyworkquietlyinschoolmakeonlypolitesmalltalkinthepublicmarketdiscusslittlemorethantradesinthehobwhichistheblackmarketwhereimakemostofmymoneyevenathomewhereiamlesspleasantiavoiddiscussingtrickytopicslikethereapingorfoodshortagesorthehungergamesprimmightbegintorepeatmywordsandthenwherewouldwebeinthewoodswaitstheonlypersonwithwhomicanbemyself":
             n = guess.num_words()
             x = guess.random_swap_neigh_chars()
             freq = [value for value in calcFreq(guess.guess).values()]
-            if guess.num_words() < n or kl_divergence(freq) > div: #loosen constraints
+            if guess.fitness() < prev_fit: #guess.num_words() < n or kl_divergence(freq) > div: #loosen constraints
                 guess.swap_general(x)
             if count > MAX_ITER and guess.num_words() < MIN_WORDS:
                 guess.reset()
                 exc_max_iter = True
+            prev_fit=guess.fitness()
             count += 1
             c += 1
             if c >= 5000:

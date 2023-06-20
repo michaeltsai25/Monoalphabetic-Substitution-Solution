@@ -1,4 +1,6 @@
-from utils import calcFreq, read_dictionary
+from utils import calcFreq, read_dictionary, calc_bigram_freq, calcFreq2
+from constants import DISTR_ENG_LETTERS, BIGRAMS_DISTR
+from math import log2, abs
 from random import randint
 from polyglot.text import Text
 
@@ -9,6 +11,17 @@ class Guess:
         self.ciph = ciphertext
         self.ct_to_pt = {}
         self.reset()
+
+    def fitness(self):
+        """Evaluates the fitness of a given guess"""
+        total=0
+        freq=calcFreq2(self.guess)
+        bigram_freq=calc_bigram_freq(self.guess)
+        for i in range(26):
+            total+=abs(DISTR_ENG_LETTERS[i]-freq[i])
+            for j in range(26):
+                total+=abs(BIGRAMS_DISTR[i,j]-bigram_freq[i,j])
+        return 1-log2(total)
 
     def reset(self):
         """Initializes the guess based on frequencies, modifies ct_to_pt as necessary"""

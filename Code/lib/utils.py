@@ -1,6 +1,19 @@
 import os
-from constants import DISTR_ENG_LETTERS
+from constants import DISTR_ENG_LETTERS, ALPH
 from scipy.special import rel_entr
+import numpy as np
+
+def calc_bigram_freq(ciphText):
+    freq_table=np.zeros(shape=(26,26))
+    for i in range(len(ciphText)-1):
+        freq_table[ALPH.index(ciphText[i+1]),ALPH.index(ciphText[i])] += 1
+    return freq_table/len(ciphText)
+
+def calcFreq2(ciphText):
+    freq=[]
+    for char in ALPH:
+        freq.append(ciphText.count(char)/(len(ciphText)+1))
+    return freq
 
 def calcFreq(ciphText):
     """Orders the characters in the text from least common to most common"""
