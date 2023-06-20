@@ -1,6 +1,6 @@
 from utils import calcFreq, read_dictionary, calc_bigram_freq, calcFreq2
 from constants import DISTR_ENG_LETTERS, BIGRAMS_DISTR
-from math import log2, abs
+from math import log2
 from random import randint
 from polyglot.text import Text
 
@@ -20,7 +20,7 @@ class Guess:
         for i in range(26):
             total+=abs(DISTR_ENG_LETTERS[i]-freq[i])
             for j in range(26):
-                total+=abs(BIGRAMS_DISTR[i,j]-bigram_freq[i,j])
+                total+=abs(BIGRAMS_DISTR[i,j]-bigram_freq[i,j])*0.3
         return 1-log2(total)
 
     def reset(self):

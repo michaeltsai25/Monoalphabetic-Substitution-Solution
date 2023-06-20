@@ -28,7 +28,7 @@ class Runner:
             prev_fit=guess.fitness()
             count += 1
             c += 1
-            if c >= 5000:
+            if c >= 50000:
                 break
             if exc_max_iter:
                 div += 0.01

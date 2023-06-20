@@ -1,5 +1,3 @@
-import numpy as np
-
 def org_bigrams():
     with open("Data/Bigrams_org/bigramsfreq.txt", "r") as file:
         bi=file.read()
