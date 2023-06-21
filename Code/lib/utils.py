@@ -4,15 +4,16 @@ from scipy.special import rel_entr
 import numpy as np
 
 def calc_bigram_freq(ciphText):
+    np.set_printoptions(linewidth=375)
     freq_table=np.zeros(shape=(26,26))
     for i in range(len(ciphText)-1):
         freq_table[ALPH.index(ciphText[i+1]),ALPH.index(ciphText[i])] += 1
-    return freq_table/len(ciphText)
+    return freq_table/(len(ciphText)-1)
 
 def calcFreq2(ciphText):
     freq=[]
     for char in ALPH:
-        freq.append(ciphText.count(char)/(len(ciphText)+1))
+        freq.append(ciphText.count(char)/(len(ciphText)))
     return freq
 
 def calcFreq(ciphText):
@@ -55,4 +56,4 @@ def kl_divergence(cipherDistr):
     return sum(rel_entr(cipherDistr, DISTR_ENG_LETTERS[0:len(cipherDistr)]))
 
 if __name__ == "__main__":
-    pass
+    print(calc_bigram_freq("thisisatest"))

@@ -18,9 +18,11 @@ class Guess:
         freq=calcFreq2(self.guess)
         bigram_freq=calc_bigram_freq(self.guess)
         for i in range(26):
+            bi_total=0
             total+=abs(DISTR_ENG_LETTERS[i]-freq[i])
             for j in range(26):
-                total+=abs(BIGRAMS_DISTR[i,j]-bigram_freq[i,j])*0.3
+                bi_total+=abs(BIGRAMS_DISTR[i,j]-bigram_freq[i,j])
+            total+=bi_total*0.3
         return 1-log2(total)
 
     def reset(self):
@@ -114,8 +116,10 @@ class Guess:
         for i in range(len(c)):
             c = c[0:i] + self.ct_to_pt[c[i]] + c[i+1:len(c)]
         self.guess = c
-
+ 
 if __name__ == "__main__":
     g = Guess("mymotherwasverybeautifulonce")
-    g.num_words(test=True)
+    print(calc_bigram_freq("mymotherwasverybeautifulonce"))
+    print(calcFreq2("mymotherwasverybeautifulonce"))
+    print(g.fitness())
     #testing git using command line
