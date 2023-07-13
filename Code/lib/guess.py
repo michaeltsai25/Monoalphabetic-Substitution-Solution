@@ -1,5 +1,5 @@
-from utils import calcFreq, read_dictionary, calc_bigram_freq, calcFreq2
-from constants import DISTR_ENG_LETTERS, BIGRAMS_DISTR
+from utils import *
+from constants import BIGRAMS_DISTR, DISTR_ENG_LETTERS_ALPH
 from math import log2
 from random import randint
 from polyglot.text import Text
@@ -19,10 +19,11 @@ class Guess:
         bigram_freq=calc_bigram_freq(self.guess)
         for i in range(26):
             bi_total=0
-            total+=abs(DISTR_ENG_LETTERS[i]-freq[i])
+            #total+=abs(DISTR_ENG_LETTERS_ALPH[i]-freq[i])
+            total+=kl_divergence(freq, alph_order=True)
             for j in range(26):
                 bi_total+=abs(BIGRAMS_DISTR[i,j]-bigram_freq[i,j])
-            total+=bi_total*0.3
+        total+=bi_total*0.3
         return 1-log2(total)
 
     def reset(self):
@@ -118,8 +119,9 @@ class Guess:
         self.guess = c
  
 if __name__ == "__main__":
-    g = Guess("mymotherwasverybeautifulonce")
-    print(calc_bigram_freq("mymotherwasverybeautifulonce"))
-    print(calcFreq2("mymotherwasverybeautifulonce"))
+    print(len(DISTR_ENG_LETTERS_ALPH))
+    g = Guess("test")
+    print(calc_bigram_freq("test"))
+    print(calcFreq2("test"))
     print(g.fitness())
     #testing git using command line

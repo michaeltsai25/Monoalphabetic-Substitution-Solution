@@ -1,5 +1,5 @@
 import os
-from constants import DISTR_ENG_LETTERS, ALPH
+from constants import DISTR_ENG_LETTERS, ALPH, DISTR_ENG_LETTERS_ALPH
 from scipy.special import rel_entr
 import numpy as np
 
@@ -51,8 +51,10 @@ def read_file(file):
         dic = dic.split('\n')
     return dic
 
-def kl_divergence(cipherDistr):
+def kl_divergence(cipherDistr, alph_order=False):
     """Calculates the KL-Divergence from the input distribution to the distribution of letters in the English language"""
+    if alph_order:
+        return sum(rel_entr(cipherDistr, DISTR_ENG_LETTERS_ALPH[0:len(cipherDistr)]))
     return sum(rel_entr(cipherDistr, DISTR_ENG_LETTERS[0:len(cipherDistr)]))
 
 if __name__ == "__main__":
