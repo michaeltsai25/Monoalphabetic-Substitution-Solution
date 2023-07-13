@@ -19,8 +19,8 @@ class Guess:
         bigram_freq=calc_bigram_freq(self.guess)
         for i in range(26):
             bi_total=0
-            #total+=abs(DISTR_ENG_LETTERS_ALPH[i]-freq[i])
-            total+=kl_divergence(freq, alph_order=True)
+            total+=abs(DISTR_ENG_LETTERS_ALPH[i]-freq[i])
+            #total+=kl_divergence(freq, alph_order=True)
             for j in range(26):
                 bi_total+=abs(BIGRAMS_DISTR[i,j]-bigram_freq[i,j])
         total+=bi_total*0.3
