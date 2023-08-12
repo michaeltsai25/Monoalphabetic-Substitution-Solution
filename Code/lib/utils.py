@@ -30,7 +30,8 @@ def store_freq(ciphText):
     return freq
 
 def read_data(name):
-    with open(os.path.join("/Users/michaeltsai/Documents/Github/Monoalphabetic-Substitution-Solution/Data/", name), 'r') as new_file:
+    #with open(os.path.join("/Users/michaeltsai/Documents/Github/Monoalphabetic-Substitution-Solution/Data/", name), 'r') as new_file:
+    with open(os.path.join("Data/", name), 'r') as new_file:
         data = new_file.read()
         data = data.replace('[', "")
         data = data.replace(']', "")
